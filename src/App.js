@@ -1,10 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 
 let HolaIndex = () => <p>Hola</p>
 
 let NotImplemeted = () =>{
-  return <h1>Esta página aún no esta lista</h1>
+  return (
+  <>
+    <Link to="/videos">Ir a videos</Link>
+    <h1>Esta página aún no esta lista</h1>
+  </>
+  )
 }
 
 function App() {
