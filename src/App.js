@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, Navigate, useParams, useLocation } from 'react-router-dom'
 
 
 let NotImplemeted = () =>{
@@ -10,12 +10,38 @@ let NotImplemeted = () =>{
   )
 }
 
-let UsuariosOulet = () => {
-let navigate = useNavigate();
-
-let redirect = () => {
-  navigate('/');
+let Error404 = () =>{
+  return (
+  <>
+    <Link to="/">Regresar al inicio</Link>
+    <h1>Esta página no existe</h1>
+  </>
+  )
 }
+
+
+let VideoShow = () => {
+  let { id } = useParams();
+  let location = useLocation();
+  // History API
+  let queryParams = new URLSearchParams(location.search)
+  for(let p of queryParams ) {
+    console.log(p);
+  };
+
+  return (
+    <>
+      <p>{id}</p>
+    </>
+  )
+}
+
+let UsuariosOulet = () => {
+  let navigate = useNavigate();
+
+  let redirect = () => {
+    navigate('/');
+  }
 
   return (
     <>
@@ -42,8 +68,10 @@ function App() {
         <Route path = "videos">
           <Route path="" element={<NotImplemeted />}></Route>
           <Route path="nuevo" element={<NotImplemeted />}></Route>
-          <Route path=":id" element={<NotImplemeted />}></Route>
+          <Route path=":id" element={<VideoShow />}></Route>
         </Route>
+
+        <Route path = "*" element={<Error404 />}></Route>
 
       </Routes>
     </BrowserRouter>
