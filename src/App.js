@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, Navigate } from 'react-router-dom'
 
 
 let NotImplemeted = () =>{
@@ -11,21 +11,28 @@ let NotImplemeted = () =>{
 }
 
 let UsuariosOulet = () => {
+let navigate = useNavigate();
+
+let redirect = () => {
+  navigate('/');
+}
+
   return (
     <>
-      <p>Hola desde usuario</p>
+      <button onClick={redirect}>Home</button>
       <Outlet />
     </>
   )
 }
 
 function App() {
+  const isAuth = true;
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<NotImplemeted />}></Route>
         
-        <Route path="/usuarios" element={<UsuariosOulet />}>
+        <Route path="/usuarios" element={ isAuth ? <Navigate to='/' /> :  <UsuariosOulet />}>
           <Route path="registro" element={<NotImplemeted />}></Route>
           <Route path="login" element={<NotImplemeted />}></Route>
           <Route path=":id" element={<NotImplemeted />}></Route>
