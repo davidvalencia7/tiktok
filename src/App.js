@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, Navigate, useParams, useLocation } from 'react-router-dom'
 
+import {
+  Provider
+} from 'react-redux'
+
+import { store } from './store'
 
 let NotImplemeted = () =>{
   return (
@@ -55,25 +60,27 @@ function App() {
   const isAuth = true;
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<NotImplemeted />}></Route>
-        
-        <Route path="/usuarios" element={ isAuth ? <Navigate to='/' /> :  <UsuariosOulet />}>
-          <Route path="registro" element={<NotImplemeted />}></Route>
-          <Route path="login" element={<NotImplemeted />}></Route>
-          <Route path=":id" element={<NotImplemeted />}></Route>
-          <Route path=":id/videos" element={<NotImplemeted />}></Route>
-        </Route>
+      <Provider store={store}> {/*todos los Componentes que esten dentro de Provider tienen acceso al store */}
+        <Routes>
+          <Route path="/" element={<NotImplemeted />}></Route>
+          
+          <Route path="/usuarios" element={ isAuth ? <Navigate to='/' /> :  <UsuariosOulet />}>
+            <Route path="registro" element={<NotImplemeted />}></Route>
+            <Route path="login" element={<NotImplemeted />}></Route>
+            <Route path=":id" element={<NotImplemeted />}></Route>
+            <Route path=":id/videos" element={<NotImplemeted />}></Route>
+          </Route>
 
-        <Route path = "videos">
-          <Route path="" element={<NotImplemeted />}></Route>
-          <Route path="nuevo" element={<NotImplemeted />}></Route>
-          <Route path=":id" element={<VideoShow />}></Route>
-        </Route>
+          <Route path = "videos">
+            <Route path="" element={<NotImplemeted />}></Route>
+            <Route path="nuevo" element={<NotImplemeted />}></Route>
+            <Route path=":id" element={<VideoShow />}></Route>
+          </Route>
 
-        <Route path = "*" element={<Error404 />}></Route>
+          <Route path = "*" element={<Error404 />}></Route>
 
-      </Routes>
+        </Routes>
+      </Provider>
     </BrowserRouter>
   );
 }
