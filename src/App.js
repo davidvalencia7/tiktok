@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, Navigate, useParams, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Outlet, useNavigate, useParams, useLocation } from 'react-router-dom'
 
 import {
   Provider
 } from 'react-redux'
 
 import { store } from './store'
+import SignIn from './users/SignIn'
 
 let NotImplemeted = () =>{
   return (
@@ -50,23 +51,22 @@ let UsuariosOulet = () => {
 
   return (
     <>
-      <button onClick={redirect}>Home</button>
+
       <Outlet />
     </>
   )
 }
 
 function App() {
-  const isAuth = true;
   return (
     <BrowserRouter>
       <Provider store={store}> {/*todos los Componentes que esten dentro de Provider tienen acceso al store */}
         <Routes>
           <Route path="/" element={<NotImplemeted />}></Route>
           
-          <Route path="/usuarios" element={ isAuth ? <Navigate to='/' /> :  <UsuariosOulet />}>
+          <Route path="/usuarios" element={<UsuariosOulet />}>
             <Route path="registro" element={<NotImplemeted />}></Route>
-            <Route path="login" element={<NotImplemeted />}></Route>
+            <Route path="login" element={<SignIn />}></Route>
             <Route path=":id" element={<NotImplemeted />}></Route>
             <Route path=":id/videos" element={<NotImplemeted />}></Route>
           </Route>

@@ -10,7 +10,7 @@ let userSlice = createSlice({
         status : ''
     },
     reducers : {
-        singIn : (state,action) => {
+        signIn : (state,action) => {
             state.user = action.payload;
         },
         logOut : (state) => {
@@ -19,7 +19,7 @@ let userSlice = createSlice({
     }
 })
 
-export  const { singIn, logOut } = userSlice.actions;
+export  const { signIn, logOut } = userSlice.actions;
 
 export const store = configureStore({
     reducer : {
